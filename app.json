@@ -1,0 +1,21 @@
+{
+    "env": {
+      "REACT_APP_NODE_ENV": {
+        "required": true
+      }
+    },
+    "buildpacks": [
+      {
+        "url": "heroku/nodejs"
+      }
+    ],
+    "description": "",
+    "formation": {
+      "web": {
+        "quantity": 1
+      }
+    },
+    "name": "Chatopia",
+    "scripts": {},
+    "stack": "heroku-18"
+  }
