@@ -1,7 +1,6 @@
 import React from "react";
-// import logo from "./logo.svg";
 
-function App() {
+function Main() {
   return (
     <div className="App">
       <div className="bg-white w-1/4 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
@@ -53,4 +52,4 @@ function App() {
   );
 }
 
-export default App;
+export default Main;
