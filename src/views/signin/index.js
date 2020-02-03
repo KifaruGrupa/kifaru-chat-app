@@ -1,5 +1,5 @@
 import React from 'react';
-import { LogIn } from '../../utils/anotherutil/firebase/auth';
+import { LogIn } from '../../utils/firebase/auth';
 
 const SignIn = () => {
   const [ phone, getPhone ] = React.useState('');

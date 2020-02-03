@@ -1,5 +1,5 @@
 import React from 'react';
-import { InitializeCaptcha, UserExist, SetPassword, SignOut, VerifyPhoneNumber, SignUp } from '../../utils/anotherutil/firebase/auth';
+import { InitializeCaptcha, UserExist, SetPassword, SignOut, VerifyPhoneNumber, SignUp } from '../../utils/firebase/auth';
 
 const Signup = () => {
   const [ phone, getPhone ] = React.useState('');
