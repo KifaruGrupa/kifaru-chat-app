@@ -3,9 +3,9 @@ import {
   InitializeCaptcha,
   UserExist,
   SetPassword,
-  SignOut,
   VerifyPhoneNumber,
-  SignUp
+  SignUp,
+  LogIn
 } from '../../utils/firebase/auth';
 import chatIcon from '../../assets/chat.svg';
 import groupIcon from '../../assets/group.svg';
@@ -14,7 +14,7 @@ import {ReactComponent as ArrowIcon} from '../../assets/arrow-back.svg';
 import './home.scss';
 import 'react-phone-number-input/style.css';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
-import OTPInput, { ResendOTP } from "otp-input-react";
+import OTPInput from "otp-input-react";
 import { ClipLoader } from "react-spinners";
 
 
@@ -25,8 +25,7 @@ const Main = () => {
   const [ phone, setPhone ] = useState('');
   const [OTP, setOTP] = useState("");
   const [error, setError] = useState("");
-  const [ verification, getVerification ] = useState('');
-  const [ password, getPassword ] = useState('');
+  const [ password, setPassword ] = useState('');
   const [ verify, showVerify ] = useState(false);
   const [ verified, getVerified ] = useState(false);
 
@@ -34,8 +33,11 @@ const Main = () => {
     try{
       setLoading(true);
       const userExist = await UserExist(phone);
-      if(userExist.status === 'success')
-      return alert(userExist.message)
+      if(userExist.status === 'success') {
+        setIndex(4);
+        setLoading(false);
+        return;
+      }
       setLoading(false);
       InitializeCaptcha('recaptcha-container').then(resp => {
         VerifyPhoneNumber(phone)
@@ -59,7 +61,7 @@ const Main = () => {
       if(resp.status === "fail") {
         setError("Incorrect OTP.")
       }else{
-
+        setIndex(4)
       }
       getVerified(true);
       setLoading(false);
@@ -68,11 +70,23 @@ const Main = () => {
       console.log(err);
       setLoading(false);
     })
-  }
+  };
 
   const SavePassword = () => {
     SetPassword(password)
     .then(resp=>console.log(resp))
+    .catch(err=>console.log(err))
+  }
+
+  const SignInUser = () => {
+    LogIn({ phone, password })
+    .then(resp => {
+      if(resp.status === "fail") {
+        setError("The password is incorrect");
+      }else{
+        this.props.history.push('/home')
+      }
+    })
     .catch(err=>console.log(err))
   }
 
@@ -82,8 +96,17 @@ const Main = () => {
         <h1 className="text-5xl w-2/5 leading-none text-center font-extrabold text-white">Let’s Focus More on Conversations</h1>
         <p className="text-white mt-6 w-2/5 text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text dummy text of the printing and typesetting industry  industry's standard.</p>
         <div className="flex flex-col justify-center capsule bg-white">
+          {
+            !isLoading && (
+              <p className="text-xs self-start font-bold">
+                {
+                  index === 0 ? "ENTER PHONE NUMBER" : index === 2 ? "ENTER OTP" : index === 4 ? "ENTER PASSWORD" : ""
+                }
+              </p>
+            )
+          }
           { !isLoading ? (
-            <div className={`flex w-full items-center ${ error != "" ? 'mt-6' : 'mt-0'}`}>
+            <div className={`flex w-full items-center ${ error === "" ? 'mb-2' : 'mt-0'}`}>
               {
                 index === 1 ?  (
                   <div id='recaptcha-container' className="w-5/6 mr-6"/>
@@ -103,9 +126,25 @@ const Main = () => {
                     className="w-5/6 mr-4"
                   />
                 ) :
+                index == 4  ? (
+                  <OTPInput
+                    value={password}
+                    onChange={(value)=>{
+                      setError("");
+                      setPassword(value)
+                    }}
+                    autoFocus
+                    OTPLength={6}
+                    secure
+                    otpType="number"
+                    disabled={false}
+                    inputClassName="ml-0"
+                    className="w-5/6 mr-4"
+                  />
+                ) :
                 (
                   <PhoneInput
-                    placeholder="Enter phone number"
+                    placeholder="Phone number"
                     value={phone}
                     onChange={(value)=>{
                       setPhone(value);
@@ -135,6 +174,11 @@ const Main = () => {
                   setIndex(2);
                 }else if(index === 2) {
                   verifyUser();
+                }else if(index === 3) {
+                  SavePassword();
+                }else if(index === 4 && !verified ){
+                  console.log("called=>");
+                  SignInUser();
                 }
               }}>
                 <ArrowIcon/>
@@ -158,12 +202,12 @@ const Main = () => {
         </div>
 
         <div>
-          <img src={chatIcon}/>
+          <img src={callIcon}/>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text dummy</p>
         </div>
 
         <div>
-          <img src={chatIcon}/>
+          <img src={groupIcon}/>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text dummy</p>
         </div>
 
