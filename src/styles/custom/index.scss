@@ -12,3 +12,46 @@
     }
   }
 }
+
+input:focus, select:focus {
+  outline: none;
+}
+
+.arrow-back {
+  animation: flip 0.2s linear forwards;
+
+  @keyframes flip {
+    from {transform: rotate(0deg);}
+    to { transform: rotate(90deg);}
+  }
+}
+
+.search-wraper {
+  input {
+    font-size: 0.9em;
+    font-weight: 500;
+  }
+  input::placeholder {
+    font-size: 0.8em;
+    font-weight: 400;
+  }
+}
+
+.chatbox-input:checked + label {
+  background-color: rgba(196, 196, 196, 0.39);
+}
+
+.chat-box-label:hover {
+  background-color: rgba(196, 196, 196, 0.19);
+}
+
+.side-bar {
+  transform: translateX(0);
+  transition: transform 0.5s ease;
+}
+
+.hide-side-bar {
+  @media screen and (max-width: 767px) {
+  transform: translateX(-100%);
+  }
+}
