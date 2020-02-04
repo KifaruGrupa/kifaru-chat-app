@@ -1,4 +1,5 @@
-import * as firebase from 'firebase'
+import firebase from 'firebase'
+import {database} from 'firebase';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -14,3 +15,4 @@ const config = {
 firebase.initializeApp(config)
 
 export default firebase;
+export {database}

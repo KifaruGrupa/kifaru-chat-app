@@ -7,7 +7,7 @@ function Main() {
         <div className="mb-4">
           <label
             className="block text-grey-darker text-sm font-bold mb-2"
-            for="username"
+            htmlFor="username"
           >
             Username
           </label>
@@ -21,7 +21,7 @@ function Main() {
         <div className="mb-6">
           <label
             className="block text-grey-darker text-sm font-bold mb-2"
-            for="password"
+            htmlFor="password"
           >
             Password
           </label>
