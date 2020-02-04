@@ -17,14 +17,22 @@ header {
   padding: 2rem 4rem;
   display: flex;
   align-items: center;
+  justify-content: center;
   input {
     outline: none;
     border-bottom: 3px solid #00b493;
     padding-bottom: 5px;
     margin-left: 1rem;
+    font-weight: 900;
+    letter-spacing: 5px;
+    &::placeholder {
+        font-weight: 300;
+        letter-spacing: 1px;
+    }
   }
   .ml-0 {
     margin-left: 0;
+    font-weight: 900;
   }
   button {
     outline: none;

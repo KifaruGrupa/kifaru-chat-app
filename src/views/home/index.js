@@ -13,10 +13,9 @@ import callIcon from '../../assets/call.svg';
 import {ReactComponent as ArrowIcon} from '../../assets/arrow-back.svg';
 import './home.scss';
 import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import OTPInput, { ResendOTP } from "otp-input-react";
 import { ClipLoader } from "react-spinners";
-
 
 
 
@@ -25,6 +24,7 @@ const Main = () => {
   const [index, setIndex] = useState(0);
   const [ phone, setPhone ] = useState('');
   const [OTP, setOTP] = useState("");
+  const [error, setError] = useState("");
   const [ verification, getVerification ] = useState('');
   const [ password, getPassword ] = useState('');
   const [ verify, showVerify ] = useState(false);
@@ -32,7 +32,6 @@ const Main = () => {
 
   const captcha = async () => {
     try{
-      console.log(phone)
       setLoading(true);
       const userExist = await UserExist(phone);
       if(userExist.status === 'success')
@@ -41,8 +40,7 @@ const Main = () => {
       InitializeCaptcha('recaptcha-container').then(resp => {
         VerifyPhoneNumber(phone)
         .then(resp => {
-          console.log(resp)
-          showVerify(true)
+          setIndex(2);
           setLoading(false);
         })
         .catch(err=>console.log(err))
@@ -51,13 +49,18 @@ const Main = () => {
       setLoading(false);
       console.log(e);
     }
-  }
+  };
 
   const verifyUser = () => {
     setLoading(true);
     SignUp(OTP)
-    .then(resp=>{
+    .then(resp => {
       console.log(resp)
+      if(resp.status === "fail") {
+        setError("Incorrect OTP.")
+      }else{
+
+      }
       getVerified(true);
       setLoading(false);
     })
@@ -65,12 +68,6 @@ const Main = () => {
       console.log(err);
       setLoading(false);
     })
-  }
-
-  const SignOutUser = () => {
-    SignOut()
-    .then(resp=>console.log('user signed out'))
-    .catch(err=>console.log('user signed error'))
   }
 
   const SavePassword = () => {
@@ -84,17 +81,20 @@ const Main = () => {
       <header>
         <h1 className="text-5xl w-2/5 leading-none text-center font-extrabold text-white">Let’s Focus More on Conversations</h1>
         <p className="text-white mt-6 w-2/5 text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text dummy text of the printing and typesetting industry  industry's standard.</p>
-        <div className="flex justify-center capsule bg-white">
+        <div className="flex flex-col justify-center capsule bg-white">
           { !isLoading ? (
-            <div className="flex w-full items-center">
+            <div className={`flex w-full items-center ${ error != "" ? 'mt-6' : 'mt-0'}`}>
               {
                 index === 1 ?  (
                   <div id='recaptcha-container' className="w-5/6 mr-6"/>
                 ) :
-                index == 2 ? (
+                index == 2  ? (
                   <OTPInput
                     value={OTP}
-                    onChange={setOTP}
+                    onChange={(value)=>{
+                      setError("");
+                      setOTP(value)
+                    }}
                     autoFocus
                     OTPLength={6}
                     otpType="number"
@@ -107,14 +107,27 @@ const Main = () => {
                   <PhoneInput
                     placeholder="Enter phone number"
                     value={phone}
-                    onChange={()=> setPhone(phone)}
+                    onChange={(value)=>{
+                      setPhone(value);
+                      setError("");
+                    }}
                     defaultCountry="NG"
                     className="w-5/6 mr-6"
                   />
                 )
               }
 
-              <button className="flex justify-center bg-secondary rounded-full" onClick={()=>{
+              <button disabled={index == 1 && !verify} className="flex justify-center bg-secondary rounded-full" onClick={() => {
+                if(!isValidPhoneNumber(phone)){
+                  setError("Invalid phone number")
+                  return;
+                }
+
+                if(index === 2 && OTP.length < 6){
+                  setError("Invalid OTP");
+                  return;
+                }
+
                 if(index === 0){
                   setIndex(1);
                   captcha();
@@ -135,6 +148,7 @@ const Main = () => {
               />
             )
           }
+          <p className="text-sm text-red-600">{error}</p>
         </div>
       </header>
       <div id="middle">
