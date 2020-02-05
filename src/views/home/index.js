@@ -18,18 +18,15 @@ import OTPInput from "otp-input-react";
 import { ClipLoader } from "react-spinners";
 
 
-
-const Main = () => {
+const Main = (props) => {
   const [isLoading, setLoading] = useState(false);
   const [index, setIndex] = useState(0);
-  const [ phone, setPhone ] = useState('');
+  const [ phone, setPhone ] = useState("");
   const [OTP, setOTP] = useState("");
   const [error, setError] = useState("");
   const [ password, setPassword ] = useState('');
-  const [ verify, showVerify ] = useState(false);
-  const [ verified, getVerified ] = useState(false);
-
-  const captcha = async () => {
+  
+  const captcha = async() => {
     try{
       setLoading(true);
       const userExist = await UserExist(phone);
@@ -61,9 +58,8 @@ const Main = () => {
       if(resp.status === "fail") {
         setError("Incorrect OTP.")
       }else{
-        setIndex(4)
+        setIndex(3)
       }
-      getVerified(true);
       setLoading(false);
     })
     .catch(err=>{
@@ -72,11 +68,15 @@ const Main = () => {
     })
   };
 
-  const SavePassword = () => {
+  const savePassword = ()=> {
+    setLoading(true);
     SetPassword(password)
-    .then(resp=>console.log(resp))
+    .then(resp=>{
+      setLoading(false);
+      props.history.push('/home')
+    })
     .catch(err=>console.log(err))
-  }
+  };
 
   const SignInUser = () => {
     LogIn({ phone, password })
@@ -84,11 +84,36 @@ const Main = () => {
       if(resp.status === "fail") {
         setError("The password is incorrect");
       }else{
-        this.props.history.push('/home')
+        props.history.push('/home')
       }
     })
     .catch(err=>console.log(err))
   }
+
+  const handleNextClick = (event)=> {
+    if(!isValidPhoneNumber(phone)){
+      setError("Invalid phone number")
+      return;
+    }
+
+    if(index === 2 && OTP.length < 6){
+      setError("Invalid OTP");
+      return;
+    }
+
+    if(index === 0){
+      setIndex(1);
+      captcha();
+    }else if(index === 1) {
+      setIndex(2);
+    }else if(index === 2) {
+      verifyUser();
+    }else if(index === 3) {
+      savePassword();
+    }else if(index === 4){
+      SignInUser();
+    }
+  };
 
   return (
     <div className="App">
@@ -100,7 +125,7 @@ const Main = () => {
             !isLoading && (
               <p className="text-xs self-start font-bold">
                 {
-                  index === 0 ? "ENTER PHONE NUMBER" : index === 2 ? "ENTER OTP" : index === 4 ? "ENTER PASSWORD" : ""
+                  index === 0 ? "ENTER PHONE NUMBER" : index === 2 ? "ENTER OTP" : (index === 3 || index === 4) ? "ENTER PASSWORD" : ""
                 }
               </p>
             )
@@ -111,7 +136,7 @@ const Main = () => {
                 index === 1 ?  (
                   <div id='recaptcha-container' className="w-5/6 mr-6"/>
                 ) :
-                index == 2  ? (
+                index === 2  ? (
                   <OTPInput
                     value={OTP}
                     onChange={(value)=>{
@@ -126,20 +151,15 @@ const Main = () => {
                     className="w-5/6 mr-4"
                   />
                 ) :
-                index == 4  ? (
-                  <OTPInput
+                (index === 3 || index === 4)  ? (
+                  <input
+                    type="text"
                     value={password}
-                    onChange={(value)=>{
+                    onChange={(e)=>{
                       setError("");
-                      setPassword(value)
+                      setPassword(e.target.value)
                     }}
-                    autoFocus
-                    OTPLength={6}
-                    secure
-                    otpType="number"
-                    disabled={false}
-                    inputClassName="ml-0"
-                    className="w-5/6 mr-4"
+                    className="w-5/6 mr-6"
                   />
                 ) :
                 (
@@ -156,31 +176,7 @@ const Main = () => {
                 )
               }
 
-              <button disabled={index == 1 && !verify} className="flex justify-center bg-secondary rounded-full" onClick={() => {
-                if(!isValidPhoneNumber(phone)){
-                  setError("Invalid phone number")
-                  return;
-                }
-
-                if(index === 2 && OTP.length < 6){
-                  setError("Invalid OTP");
-                  return;
-                }
-
-                if(index === 0){
-                  setIndex(1);
-                  captcha();
-                }else if(index === 1) {
-                  setIndex(2);
-                }else if(index === 2) {
-                  verifyUser();
-                }else if(index === 3) {
-                  SavePassword();
-                }else if(index === 4 && !verified ){
-                  console.log("called=>");
-                  SignInUser();
-                }
-              }}>
+              <button className="flex justify-center bg-secondary rounded-full" onClick={handleNextClick}>
                 <ArrowIcon/>
               </button>
             </div>
