@@ -2,13 +2,9 @@
   height: 100vh;
   .App{
     height: 100%;
-    background: grey;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .btn{
-      padding: .5rem 1rem;
-      margin: 1rem 0;
-    }
+    display: grid;
+    padding: 0;
+    margin: 0;
+    grid-template-rows: 1.5fr 1fr 80px;
   }
 }

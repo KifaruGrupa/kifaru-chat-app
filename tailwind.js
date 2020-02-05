@@ -15,6 +15,8 @@ module.exports = {
       black: '#000',
       white: '#fff',
 
+      primary: '#00B493',
+      secondary: '#FFC46A',
       gray: {
         100: '#f7fafc',
         200: '#edf2f7',
@@ -135,6 +137,7 @@ module.exports = {
       '4': '1rem',
       '5': '1.25rem',
       '6': '1.5rem',
+      '7': '1.8rem',
       '8': '2rem',
       '10': '2.5rem',
       '12': '3rem',
