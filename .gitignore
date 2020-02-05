@@ -8,6 +8,8 @@
 # testing
 /coverage
 
+template.config.js
+
 # production
 /build
 
