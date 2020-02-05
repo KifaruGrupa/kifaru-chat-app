@@ -15,7 +15,11 @@ module.exports = {
       black: '#000',
       white: '#fff',
 
+      primary: '#00B493',
+      secondary: '#FFC46A',
       gray: {
+        10: '#FBFBFB',
+        50: 'rgba(0, 0, 0, 0.60)',
         100: '#f7fafc',
         200: '#edf2f7',
         300: '#e2e8f0',
@@ -60,6 +64,9 @@ module.exports = {
         900: '#744210',
       },
       green: {
+        40: 'rgba(255, 255, 255, 0.40)',
+        50: 'rgba(196, 196, 196, 0.39)',
+        70: 'rgba(255, 255, 255, 0.70)',
         100: '#f0fff4',
         200: '#c6f6d5',
         300: '#9ae6b4',
@@ -69,6 +76,8 @@ module.exports = {
         700: '#2f855a',
         800: '#276749',
         900: '#22543d',
+        1100: '#00B493',
+        1200: '#01C5A1'
       },
       teal: {
         100: '#e6fffa',
@@ -135,6 +144,7 @@ module.exports = {
       '4': '1rem',
       '5': '1.25rem',
       '6': '1.5rem',
+      '7': '1.8rem',
       '8': '2rem',
       '10': '2.5rem',
       '12': '3rem',
@@ -179,6 +189,7 @@ module.exports = {
       default: '1px',
       '0': '0',
       '2': '2px',
+      '3': '3px',
       '4': '4px',
       '8': '8px',
     },
@@ -251,6 +262,7 @@ module.exports = {
       ],
     },
     fontSize: {
+      xxs: '0.65rem',
       xs: '0.75rem',
       sm: '0.875rem',
       base: '1rem',
@@ -315,7 +327,7 @@ module.exports = {
     },
     maxWidth: {
       xs: '20rem',
-      sm: '24rem',
+      sm: '25rem',
       md: '28rem',
       lg: '32rem',
       xl: '36rem',
@@ -332,6 +344,9 @@ module.exports = {
       screen: '100vh',
     },
     minWidth: {
+      sm: '25rem',
+      md: '28rem',
+      lg: '32rem',
       '0': '0',
       full: '100%',
     },
@@ -379,6 +394,8 @@ module.exports = {
     width: theme => ({
       auto: 'auto',
       ...theme('spacing'),
+      '19': '4.5rem',
+      '500': '32rem',
       '1/2': '50%',
       '1/3': '33.333333%',
       '2/3': '66.666667%',
