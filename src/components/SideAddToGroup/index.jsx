@@ -13,7 +13,7 @@ const SideAddToGroup = ({ setAddGroup }) => {
 	return (
 		<div className='add-to-group-wrap z-50 flex fixed inset-0 w-screen h-screen'>
 			<div onClick={() => setAddGroup(false)} className='modal flex-grow bg-gray-50'></div>
-			<div className='add-to-group min-w-sm md:min-w-md max-w-lg side-bar  md:w-3/12 bg-green-1100'>
+			<div className='add-to-group md:min-w-md max-w-lg side-bar  md:w-3/12 bg-green-1100'>
 				<div className='recent-chat-header px-8 w-100 h-20 flex justify-center items-center'>
 					<div onClick={() => setAddGroup(false)} className='cursor-pointer'>
 						<CutIcon />{' '}
@@ -22,7 +22,7 @@ const SideAddToGroup = ({ setAddGroup }) => {
 						Add To Group
 					</h3>
 				</div>
-				<Search placeholder='Search oto add to a group' />
+				<Search placeholder='Search to add to a group' />
 				<div className='messages pt-4'>
 					{text.map((msg, index) => (
 						<Chatbox
