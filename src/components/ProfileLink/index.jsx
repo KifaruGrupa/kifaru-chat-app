@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProfileLink = ({ sidePos }) => {
 	return (
-		<div className={`profile-link md:hidden w-19 py-1 rounded-full flex items-center ml-6 justify-center px-2 ${sidePos ? 'bg-white' : 'bg-green-1100'}`}>
+		<div className={`profile-link ${sidePos ? `md:hidden` : ''} w-19 py-1 rounded-full flex items-center ml-4 justify-center px-2 ${sidePos ? 'bg-white' : 'bg-green-1100'}`}>
 			<img
 				src='https://i.pinimg.com/236x/10/7f/10/107f10abd0b67486b7f0bb17500eda22--black-men-lips.jpg'
 				alt='img'
