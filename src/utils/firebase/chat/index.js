@@ -79,7 +79,7 @@ Interact.updateUserProfile = (user) => {
         name: user.displayName,
         phone_number: user.phoneNumber,
         avatar: user.photoURL,
-     })
+     });
 }
 
 Interact.viewUserProfile = (user, setValue) => {
