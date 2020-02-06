@@ -5,6 +5,7 @@ import SignUp from '../views/signup';
 import SignIn from '../views/signin';
 import Chat from '../views/Chat';
 
+
 const app = ({ history }) => (
     <Fragment>
         <Route exact path="/" component={Home} />
