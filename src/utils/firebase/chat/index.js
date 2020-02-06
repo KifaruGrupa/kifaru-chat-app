@@ -18,6 +18,10 @@ Interact.addRoom = async (room_name = 'room') => {
         await database().ref(`room-members/${group_unique_id}`).set({
             id: group_unique_id,
         })
+        const user_detail = database().ref(`users/${userId}`);
+        user_detail.once('value', snapshot => {
+            Interact.addMemberToRoom(snapshot.val(), group_unique_id)
+        })
         await database().ref(`room-messages/${group_unique_id}`).set({
             id: group_unique_id,
         });
@@ -36,7 +40,7 @@ Interact.sendMessage = (room_id, message = 'default', username = null) => {
         displayname: user.displayName ||
         username || user.phoneNumber,
     })
-    const msg = database().ref(`chat-rooms/${room_id}`).update({
+    database().ref(`chat-rooms/${room_id}`).update({
         last_message_timestamp: timestamp
     });
 }
@@ -63,9 +67,10 @@ Interact.viewRoomMembers = (room_id, setValue) => {
 }
 
 Interact.addMemberToRoom = async (member, group_unique_id) => {
+    const id = member.id || member.uid;
     const room = database().ref(`room-members/${group_unique_id}`);
     await room.push(member);
-    database().ref(`users/${member.uid}/groups`).push({
+    database().ref(`users/${id}/groups`).push({
         room_id: group_unique_id
     })
 };
@@ -87,10 +92,11 @@ Interact.updateUserProfile = (user) => {
 }
 
 Interact.viewUserProfile = (user, setValue) => {
-   const user_detail = database().ref(`users/${user.uid}`);
-   user_detail.on('value', snapshot => {
-       setValue(JSON.stringify(snapshot.val()));
-   })
+    const the_user = user.uid || user.id;
+    const user_detail = database().ref(`users/${the_user}`);
+    user_detail.on('value', snapshot => {
+        setValue(JSON.stringify(snapshot.val()));
+    })
 }
 
 export default Interact;
