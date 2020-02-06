@@ -13,8 +13,12 @@ const addUserRecord = (user) => {
   })
 }
 
-const SaveUserToLocal = (user) => {
+export const SaveUserToLocal = (user) => {
   localStorage.chat_user = JSON.stringify(user)
+}
+
+export const removeUserFromLocal = () => {
+  localStorage.clear();
 }
 
 export const UserExist = phone => firebase.auth().fetchSignInMethodsForEmail(`${phone}@chatapp.com`)
@@ -94,8 +98,18 @@ export const LogIn = ({
 }));
 
 export const currentUser = () => {
-  const user = JSON.parse(localStorage.chat_user)
-  return user
+  return new Promise((resolve, reject) => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        resolve(user)
+      }
+      resolve(null);
+    })
+  })
+}
+
+export  const getUser = () => {
+  return JSON.parse(localStorage.chat_user)
 }
 
 export const SetPassword = async (newPassword) => {
@@ -115,4 +129,7 @@ export const SetPassword = async (newPassword) => {
   }
 }
 
-export const SignOut = () => firebase.auth().signOut();
+export const SignOut = () => {
+   firebase.auth().signOut()
+   removeUserFromLocal();
+};

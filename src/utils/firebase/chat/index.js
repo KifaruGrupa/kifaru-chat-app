@@ -1,6 +1,6 @@
 import {database} from '../config';
-import {currentUser} from '../auth';
-const user = currentUser();
+import {getUser} from '../auth';
+const user = getUser();
 
 const Interact = {};
 
@@ -18,6 +18,10 @@ Interact.addRoom = async (room_name = 'room') => {
         await database().ref(`room-members/${group_unique_id}`).set({
             id: group_unique_id,
         })
+        const user_detail = database().ref(`users/${userId}`);
+        user_detail.once('value', snapshot => {
+            Interact.addMemberToRoom(snapshot.val(), group_unique_id)
+        })
         await database().ref(`room-messages/${group_unique_id}`).set({
             id: group_unique_id,
         });
@@ -27,14 +31,18 @@ Interact.addRoom = async (room_name = 'room') => {
 
 
 Interact.sendMessage = (room_id, message = 'default', username = null) => {
+    const timestamp = new Date().getTime();
     const msg = database().ref(`room-messages/${room_id}`);
-        msg.push({
-            message,
-            timestamp: new Date().getTime(),
-            user_id: user.uid,
-            displayname: user.displayName ||
-            username || user.phoneNumber,
-        })
+    msg.push({
+        message,
+        timestamp,
+        user_id: user.uid,
+        displayname: user.displayName ||
+        username || user.phoneNumber,
+    })
+    database().ref(`chat-rooms/${room_id}`).update({
+        last_message_timestamp: timestamp
+    });
 }
 
 Interact.viewRoomMessages = (room_id, setValue) => {
@@ -59,9 +67,10 @@ Interact.viewRoomMembers = (room_id, setValue) => {
 }
 
 Interact.addMemberToRoom = async (member, group_unique_id) => {
+    const id = member.id || member.uid;
     const room = database().ref(`room-members/${group_unique_id}`);
     await room.push(member);
-    database().ref(`users/${member.uid}/groups`).push({
+    database().ref(`users/${id}/groups`).push({
         room_id: group_unique_id
     })
 };
@@ -83,10 +92,11 @@ Interact.updateUserProfile = (user) => {
 }
 
 Interact.viewUserProfile = (user, setValue) => {
-   const user_detail = database().ref(`users/${user.uid}`);
-   user_detail.on('value', snapshot => {
-       setValue(JSON.stringify(snapshot.val()));
-   })
+    const the_user = user.uid || user.id;
+    const user_detail = database().ref(`users/${the_user}`);
+    user_detail.on('value', snapshot => {
+        setValue(JSON.stringify(snapshot.val()));
+    })
 }
 
 export default Interact;

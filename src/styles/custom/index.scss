@@ -51,3 +51,7 @@ input:focus, select:focus {
   transform: translateX(-100%);
   }
 }
+
+* {
+  box-sizing: border-box;
+}
