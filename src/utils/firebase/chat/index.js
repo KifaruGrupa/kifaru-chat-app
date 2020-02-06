@@ -1,6 +1,6 @@
 import {database} from '../config';
-import {currentUser} from '../auth';
-const user = currentUser();
+import {getUser} from '../auth';
+const user = getUser();
 
 const Interact = {};
 

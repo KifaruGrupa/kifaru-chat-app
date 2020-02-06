@@ -73,7 +73,7 @@ const Main = (props) => {
     SetPassword(password)
     .then(resp=>{
       setLoading(false);
-      props.history.push('/home')
+      props.history.push('/chat')
     })
     .catch(err=>console.log(err))
   };
@@ -84,7 +84,7 @@ const Main = (props) => {
       if(resp.status === "fail") {
         setError("The password is incorrect");
       }else{
-        props.history.push('/home')
+        props.history.push('/chat')
       }
     })
     .catch(err=>console.log(err))
