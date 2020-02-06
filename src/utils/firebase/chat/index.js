@@ -27,14 +27,18 @@ Interact.addRoom = async (room_name = 'room') => {
 
 
 Interact.sendMessage = (room_id, message = 'default', username = null) => {
+    const timestamp = new Date().getTime();
     const msg = database().ref(`room-messages/${room_id}`);
-        msg.push({
-            message,
-            timestamp: new Date().getTime(),
-            user_id: user.uid,
-            displayname: user.displayName ||
-            username || user.phoneNumber,
-        })
+    msg.push({
+        message,
+        timestamp,
+        user_id: user.uid,
+        displayname: user.displayName ||
+        username || user.phoneNumber,
+    })
+    const msg = database().ref(`chat-rooms/${room_id}`).update({
+        last_message_timestamp: timestamp
+    });
 }
 
 Interact.viewRoomMessages = (room_id, setValue) => {
