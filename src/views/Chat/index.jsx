@@ -7,7 +7,7 @@ import {currentUser, removeUserFromLocal} from '../../utils/firebase/auth';
 
 const Chat = (props) => {
 	const [showSideBar, setShowBar] = useState(true);
-	const [showGroup, setAddGroup] = useState(true);
+	const [showGroup, setAddGroup] = useState(false);
 	const [isAuth, setAuth] = useState(false);
 	React.useEffect(()=> {
 		//create seperate useEffect for other items
@@ -21,10 +21,10 @@ const Chat = (props) => {
 		})
 	}, [isAuth])
 	return (!isAuth ? <div>Loading</div> :
-		<div className=' relative Chat flex w-100 min-h-screen overflow-y-scroll'>
+		<div className=' h-screen relative Chat flex w-100'>
 			<Sidebar showSideBar={showSideBar} setShowBar={setShowBar} />
-			<div className='flex-grow flex flex-col'>
-				<Navbar setShowBar={setShowBar} />
+			<div className='flex max-h-screen relative overflow-y-scroll flex-grow flex-col'>
+				<Navbar setAddGroup={setAddGroup} setShowBar={setShowBar} />
 				<ChatArea />
 			</div>
            {showGroup && <SideAddToGroup setAddGroup={setAddGroup} />}

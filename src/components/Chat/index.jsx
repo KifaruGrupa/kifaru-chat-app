@@ -4,12 +4,15 @@ import ChatForm from './ChatForm';
 import './chat.scss';
 
 const Chat = () => (
-  <div className="flex flex-grow flex-col">
-    <div className="chatBody flex-grow bg-red-600">
-      <ChatList />
-    </div>
-    <ChatForm />
-  </div>
+	<>
+		<div className='flex flex-grow overflow-y-scroll flex-col bg-red-200'>
+			<div className='chatBody overflow-y-scroll flex-grow'>
+				<ChatList />
+			</div>		
+			<ChatForm />
+		</div>
+
+	</>
 );
 
 export default Chat;
