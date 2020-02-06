@@ -2,23 +2,23 @@ $grey: #F0F0F0;
 
 .chat-form {
   .chat-frame {
-    display: grid;
-    grid-template-columns: auto auto;
+    // display: grid;
+    // grid-template-columns: auto auto;
     justify-content: center;
     align-items: center;
 
     .chat-box {
       background-color: #ffffff;
       border-radius: 25px;
-      display: grid;
-      grid-template-columns: auto auto;
+      // display: grid;
+      // grid-template-columns: auto auto;
       align-items: center;
       padding: 10px;
 
       textarea {
         border: 0;
         border-radius: 35px;
-        width: 45rem;
+        // width: 45rem;
         height: 1.7rem;
         padding: 5px;
         margin: 5px;

@@ -18,12 +18,12 @@ const ChatForm = () => {
   return (
     <div className="chat-form bg-gray-200">
       <form onSubmit={handleSubmit}>
-        <div className="chat-frame p-3">
+        <div className="chat-frame flex p-3">
           <div className="chat-smiley">
             <button className="px-10" type="button"><img src={smiley} alt='smiley' /></button>
           </div>
-          <div className="chat-box">
-            <textarea placeholder="Type a message" value={chatMessage} onChange={handleInputChange} required />
+          <div className="chat-box flex flex-grow">
+            <textarea className="flex-grow" placeholder="Type a message" value={chatMessage} onChange={handleInputChange} required />
             <button className="chat-send" type="submit"><img src={sendIcon} alt='send' /></button>
           </div>
         </div>

@@ -17,7 +17,7 @@ const ChatDetails = ({
       </div>
     </div>
     ) : (
-    <div className="chat-detail">
+    <div className="chat-detail ">
       <div className="chat-bubble triangle right-top">
         <div className="chat-text">{chatBody}</div>
         <div className="chat-time">{createdAt}</div>

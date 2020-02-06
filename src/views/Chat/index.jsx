@@ -10,7 +10,7 @@ const Chat = () => {
 	return (
 		<div className=' relative Chat flex w-100 min-h-screen overflow-y-scroll'>
 			<Sidebar showSideBar={showSideBar} setShowBar={setShowBar} />
-			<div className='flex-grow'>
+			<div className='flex-grow flex flex-col'>
 				<Navbar setShowBar={setShowBar} />
 				<ChatArea />
 			</div>
