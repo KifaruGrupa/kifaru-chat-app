@@ -1,0 +1,47 @@
+$grey: #F0F0F0;
+
+.chat-form {
+  .chat-frame {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    align-items: center;
+
+    .chat-box {
+      background-color: #ffffff;
+      border-radius: 25px;
+      display: grid;
+      grid-template-columns: auto auto;
+      align-items: center;
+      padding: 10px;
+
+      textarea {
+        border: 0;
+        border-radius: 35px;
+        width: 45rem;
+        height: 1.7rem;
+        padding: 5px;
+        margin: 5px;
+        resize: none;
+        font-size: 14px;
+      }
+
+      .chat-send {
+        background-color: #FFC46A;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        padding: 7px;
+
+        img {
+          width: 13px;
+        }
+      }
+    }
+
+    button:focus, textarea:focus {
+      outline: none;
+    }
+    
+  }
+}

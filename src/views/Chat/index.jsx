@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import Sidebar from '../../components/Sidebar';
 import SideAddToGroup from '../../components/SideAddToGroup';
 import Navbar from '../../components/Navbar';
+import ChatArea from '../../components/Chat';
 
 const Chat = () => {
 	const [showSideBar, setShowBar] = useState(true);
@@ -11,6 +12,7 @@ const Chat = () => {
 			<Sidebar showSideBar={showSideBar} setShowBar={setShowBar} />
 			<div className='flex-grow'>
 				<Navbar setShowBar={setShowBar} />
+				<ChatArea />
 			</div>
            {showGroup && <SideAddToGroup setAddGroup={setAddGroup} />}
 		</div>
