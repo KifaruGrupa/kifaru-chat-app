@@ -49,11 +49,14 @@ const Sidebar = ({ setShowBar, showSideBar }) => {
 			</div>
 			<Search placeholder='Search or start a new chat' setQuery={setQuery}/>
 			<div className='messages pt-4'>
-				{text.map((msg, index) => (
+				{filtered && filtered.map((user, index) => (
 					<Chatbox
 						setShowBar={setShowBar}
 						name='recent-msg'
-						msg={msg}
+						msg={user.message}
+						phone={user.phone_number}
+						username={user.username}
+						photo={user.avatar}
 						key={index}
 						id={`chat-box-${index}`}
 						radioType
