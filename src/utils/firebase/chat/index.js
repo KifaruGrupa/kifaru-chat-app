@@ -41,7 +41,8 @@ Interact.sendMessage = (room_id, message = 'default', username = null) => {
         username || user.phoneNumber,
     })
     database().ref(`chat-rooms/${room_id}`).update({
-        last_message_timestamp: timestamp
+        last_message_timestamp: timestamp,
+        last_mesage: message
     });
 }
 
