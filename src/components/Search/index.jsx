@@ -7,7 +7,8 @@ const Search = ({placeholder, setQuery}) => {
 
 	const handleChange = (e) => {
 		console.log('query', e.target.value);
-		setQuery(e.target.value);
+		const query = Number(e.target.value);
+		setQuery(`${query}`);
 	}
 	return (
 		<div className='search-wraper flex justify-center items-center w-100 min-h-20 bg-green-1200'>
