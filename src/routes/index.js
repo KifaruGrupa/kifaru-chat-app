@@ -4,6 +4,8 @@ import Home from '../views/home'
 import SignUp from '../views/signup';
 import SignIn from '../views/signin';
 import Chat from '../views/Chat';
+import {DataContext, DataProvider } from '../context/Appcontext'
+import {UserContext, UserProvider } from '../context/UserContext'
 
 
 const app = ({ history }) => (
@@ -11,7 +13,11 @@ const app = ({ history }) => (
         <Route exact path="/" component={Home} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
-        <Route exact path="/chat" component={Chat} />
+        <DataProvider>
+          <UserProvider>
+            <Route exact path="/chat" component={Chat} />
+          </UserProvider>
+        </DataProvider>
     </Fragment>
 );
 

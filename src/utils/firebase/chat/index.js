@@ -42,7 +42,7 @@ Interact.sendMessage = (room_id, message = 'default', username = null) => {
     })
     database().ref(`chat-rooms/${room_id}`).update({
         last_message_timestamp: timestamp,
-        last_mesage: message
+        last_message: message
     });
 }
 
@@ -99,5 +99,7 @@ Interact.viewUserProfile = (user, setValue) => {
         setValue(JSON.stringify(snapshot.val()));
     })
 }
+
+Interact.user = user;
 
 export default Interact;

@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import smiley from '../../../assets/smiley.svg';
 import sendIcon from '../../../assets/arrow-back.svg';
 import './chatForm.scss';
+import {DataContext} from '../../../context/Appcontext';
+import Interact from '../../../utils/firebase/chat'
 
 const ChatForm = () => {
   const [chatMessage, setChatMessage] = useState('');
+  const [thisGroupData] = useContext(DataContext);
+
+  useEffect(() => {
+  }, [thisGroupData]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    if(chatMessage) {
+     thisGroupData && Interact.sendMessage(thisGroupData.id, chatMessage);
     setChatMessage('');
+      return;
+    }
   };
 
   const handleInputChange = (event) => {
