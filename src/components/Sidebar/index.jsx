@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import AddToChatIcon from '../../svg/AddToChatIcon';
 import Search from '../Search';
 import Chatbox from '../Chatbox';
@@ -11,11 +11,11 @@ const text = [
 	'If you like you listen to the song or not, the guy will still make money',
 	'That your account manager called me again i toild him not to worry',
 ];
-const Sidebar = ({ setShowBar, showSideBar }) => {
+const Sidebar = ({ setShowBar, showSideBar, setShowProfile }) => {
 	const [allUsers] = useFireBase(Interact.getAllUsers);
-	
+
 	useEffect(() => {
-		if(allUsers) {
+		if (allUsers) {
 			console.log(allUsers);
 		}
 	}, [allUsers]);
@@ -28,7 +28,9 @@ const Sidebar = ({ setShowBar, showSideBar }) => {
 		>
 			<div className='recent-chat-header w-100 h-20 flex justify-end items-center pr-8'>
 				<AddToChatIcon />
-				<ProfileLink sidePos />
+				<div onClick={() => setShowProfile(true)}>
+					<ProfileLink sidePos />
+				</div>
 			</div>
 			<Search placeholder='Search or start a new chat' />
 			<div className='messages pt-4'>
