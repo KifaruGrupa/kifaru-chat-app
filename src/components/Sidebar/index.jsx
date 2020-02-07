@@ -7,7 +7,7 @@ import useFireBase from '../../CustomHook/useFireBase';
 import Groups from '../Group';
 import ArrowBack from '../../svg/ArrowBack';
 
-const Sidebar = ({ setShowBar, showSideBar }) => {
+const Sidebar = ({ setShowBar, showSideBar, setShowProfile }) => {
 	const [newRoom, setNewRoom] = useState(false);
 	const [roomName, setRoomName] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -34,7 +34,9 @@ const Sidebar = ({ setShowBar, showSideBar }) => {
 				>
 					{newRoom ? <ArrowBack color="#ffffff" /> : <AddToChatIcon />}
 				</div>
-				<ProfileLink sidePos />
+				<div onClick={() => setShowProfile(true)}>
+					<ProfileLink sidePos />
+				</div>
 			</div>
 				<div className={`newRoom ${!newRoom ? 'hidden' : '' } flex w-full px-6 pb-2`} >
 					<input
