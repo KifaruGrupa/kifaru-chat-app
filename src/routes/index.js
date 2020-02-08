@@ -9,8 +9,6 @@ import {UserContext, UserProvider } from '../context/UserContext'
 const app = ({ history }) => (
     <Fragment>
         <Route exact path="/" component={Home} />
-        <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/signin" component={SignIn} />
         <DataProvider>
           <UserProvider>
             <Route exact path="/chat" component={Chat} />
