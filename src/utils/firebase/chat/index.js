@@ -68,7 +68,7 @@ Interact.viewRoomMembers = (room_id, setValue) => {
 }
 
 Interact.addMemberToRoom = async (member, group_unique_id) => {
-    const id = member.id || member.uid;
+    const id = member.uid || member.id;
     const room = database().ref(`room-members/${group_unique_id}`);
     await room.push(member);
     database().ref(`users/${id}/groups`).push({
