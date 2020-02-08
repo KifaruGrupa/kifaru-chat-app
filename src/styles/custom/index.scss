@@ -9,6 +9,7 @@
 }
 
 input:focus,
+button:focus,
 select:focus {
 	outline: none;
 }
@@ -64,4 +65,36 @@ select:focus {
 .nav-bar {
   height: 8%;
   min-height: 5em;
+}
+
+.min-h-20 {
+	min-height: 5em;
+}
+
+.loader {
+	position: absolute;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: white;
+	max-height: 100vh;
+}
+
+.newRoom {
+	input::placeholder {
+		font-size: 0.85em;
+		color: rgba(255, 255, 255, 0.6);
+	}
+	button {
+		border-radius: 5px;
+		border-color: rgba(255, 255, 255, 0.8);
+    outline:none;
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.2);
+		}
+	}
+
+	
 }

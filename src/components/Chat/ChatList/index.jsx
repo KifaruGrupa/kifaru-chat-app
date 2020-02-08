@@ -1,73 +1,41 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import ChatDetails from '../ChatDetails';
 import './chatList.scss';
+import {DataContext} from '../../../context/Appcontext';
+import Interact from '../../../utils/firebase/chat';
+import {UserContext} from '../../../context/UserContext';
 
 const ChatList = () => {
-  const chats = [
-    {
-      'id': '1',
-      'chatUser': 'ewere',
-      'chatType': 'receiver',
-      'chatBody': 'Lorem Ipsum, Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
-      'createdAt': '8:23PM',
-    },
-    {
-      'id': '2',
-      'chatUser': 'ewere',
-      'chatType': 'sender',
-      'chatBody': 'Lorem Ipsum, Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
-      'createdAt': '8:23PM',
-    },
-    {
-      'id': '3',
-      'chatUser': 'ewere',
-      'chatType': 'receiver',
-      'chatBody': 'Lorem Ipsum, Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
-      'createdAt': '8:23PM',
-    },
-    {
-      'id': '4',
-      'chatUser': 'ewere',
-      'chatType': 'receiver',
-      'chatBody': 'Lorem Ipsum, Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
-      'createdAt': '8:23PM',
-    },
-    {
-      'id': '5',
-      'chatUser': 'ewere',
-      'chatType': 'sender',
-      'chatBody': 'Lorem Ipsum, Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
-      'createdAt': '8:23PM',
-    },
-    {
-      'id': '6',
-      'chatUser': 'ewere',
-      'chatType': 'receiver',
-      'chatBody': 'Lorem Ipsum, Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
-      'createdAt': '8:23PM',
-    },
-    {
-      'id': '7',
-      'chatUser': 'ewere',
-      'chatType': 'sender',
-      'chatBody': 'Lorem Ipsum, Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
-      'createdAt': '8:23PM',
-    },
-    {
-      'id': '8',
-      'chatUser': 'ewere',
-      'chatType': 'receiver',
-      'chatBody': 'Lorem Ipsum, Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum',
-      'createdAt': '8:23PM',
-    }
-  ];
+  const [thisGroupData] = useContext(DataContext);
+	const [thisUser] = useContext(UserContext);
+  let [msg, setMsg] = useState(null);
+  const [chats, setchats] = useState(null);
 
-  return chats.length ? (
+  useEffect(()=> {
+    if(thisGroupData) {
+      Interact.viewRoomMessages(thisGroupData.id, setMsg);
+    }
+  }, [thisGroupData])
+  useEffect(()=> {
+    if(msg) {
+      const strMsg = msg;
+      let paresedMsg = JSON.parse(strMsg);
+      paresedMsg = Object.values(paresedMsg);
+      setchats(paresedMsg);
+    }
+  }, [msg])
+
+  useEffect(()=> {
+  }, [thisUser])
+
+  return chats && chats.length ? (
     <div className="chat-list">
       {
-        chats.map((chat) => (
-          <ChatDetails chat={chat} key={chat.id} />
-        ))
+        chats && chats.map((chat, index) => {
+          if(typeof chat !== typeof '') {
+            return (<ChatDetails chat={chat} user_id={thisUser.id} user_name={thisUser.name} key={index} />)
+          }
+      })
       }
     </div>
   ) : '';

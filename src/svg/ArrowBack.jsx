@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ArrowBack = ({ className }) => {
+const ArrowBack = ({ className, color }) => {
 	return (
 		<div className={`arrow-back ${className || ''}`}>
 			<svg
@@ -14,8 +14,8 @@ const ArrowBack = ({ className }) => {
 					fillRule='evenodd'
 					clipRule='evenodd'
 					d='M7 0L7 12.2L1.4 6.6L0 8L8 16L16 8L14.6 6.6L9 12.2L9 0H7Z'
-					fill='#29362D'
-					fillOpacity='0.53'
+					fill={color || '#29362D'}
+					fillOpacity='1'
 				/>
 			</svg>
 		</div>
