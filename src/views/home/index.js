@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   InitializeCaptcha,
   UserExist,
   SetPassword,
   VerifyPhoneNumber,
   SignUp,
-  LogIn
+  LogIn, 
+  getUser
 } from '../../utils/firebase/auth';
 import chatIcon from '../../assets/chat.svg';
 import groupIcon from '../../assets/group.svg';
@@ -26,6 +27,12 @@ const Main = (props) => {
   const [error, setError] = useState("");
   const [ password, setPassword ] = useState('');
   
+  useEffect(() => {
+    console.log('getUser', getUser())
+    if(getUser()) {
+				props.history.push('/chat')
+    }
+  },[])
   const captcha = async() => {
     try{
       setLoading(true);

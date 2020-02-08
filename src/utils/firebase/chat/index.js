@@ -94,10 +94,12 @@ Interact.updateUserProfile = (user) => {
 
 Interact.viewUserProfile = (user, setValue) => {
     const the_user = user.uid || user.id;
-    const user_detail = database().ref(`users/${the_user}`);
-    user_detail.on('value', snapshot => {
-        setValue(JSON.stringify(snapshot.val()));
-    })
+    if(the_user) {
+        const user_detail = database().ref(`users/${the_user}`);
+        user_detail.on('value', snapshot => {
+            setValue(JSON.stringify(snapshot.val()));
+        })
+    }
 }
 
 Interact.user = user;
