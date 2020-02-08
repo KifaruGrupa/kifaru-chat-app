@@ -6,7 +6,8 @@ import {
   VerifyPhoneNumber,
   SignUp,
   LogIn, 
-  getUser
+  getUser,
+  SignOut
 } from '../../utils/firebase/auth';
 import chatIcon from '../../assets/chat.svg';
 import groupIcon from '../../assets/group.svg';
@@ -28,7 +29,7 @@ const Main = (props) => {
   const [ password, setPassword ] = useState('');
   
   useEffect(() => {
-    console.log('getUser', getUser())
+    SignOut();
     if(getUser()) {
 				props.history.push('/chat')
     }

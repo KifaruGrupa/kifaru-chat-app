@@ -133,6 +133,6 @@ export const SetPassword = async (newPassword) => {
 }
 
 export const SignOut = () => {
+    removeUserFromLocal();
    firebase.auth().signOut()
-   removeUserFromLocal();
 };
