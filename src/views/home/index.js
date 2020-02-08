@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   InitializeCaptcha,
   UserExist,
   SetPassword,
   VerifyPhoneNumber,
   SignUp,
-  LogIn
+  LogIn, 
+  getUser,
+  SignOut
 } from '../../utils/firebase/auth';
 import chatIcon from '../../assets/chat.svg';
 import groupIcon from '../../assets/group.svg';
@@ -26,6 +28,12 @@ const Main = (props) => {
   const [error, setError] = useState("");
   const [ password, setPassword ] = useState('');
   
+  useEffect(() => {
+    SignOut();
+    if(getUser()) {
+				props.history.push('/chat')
+    }
+  },[])
   const captcha = async() => {
     try{
       setLoading(true);
@@ -46,7 +54,6 @@ const Main = (props) => {
       })
     } catch (e) {
       setLoading(false);
-      console.log(e);
     }
   };
 
@@ -54,7 +61,6 @@ const Main = (props) => {
     setLoading(true);
     SignUp(OTP)
     .then(resp => {
-      console.log(resp)
       if(resp.status === "fail") {
         setError("Incorrect OTP.")
       }else{
@@ -63,7 +69,6 @@ const Main = (props) => {
       setLoading(false);
     })
     .catch(err=>{
-      console.log(err);
       setLoading(false);
     })
   };
@@ -153,7 +158,7 @@ const Main = (props) => {
                 ) :
                 (index === 3 || index === 4)  ? (
                   <input
-                    type="text"
+                    type="password"
                     value={password}
                     onChange={(e)=>{
                       setError("");

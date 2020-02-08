@@ -109,7 +109,10 @@ export const currentUser = () => {
 }
 
 export  const getUser = () => {
-  return JSON.parse(localStorage.chat_user)
+  if(localStorage && localStorage.chat_user) {
+    return JSON.parse(localStorage.chat_user)
+  }
+  return null;
 }
 
 export const SetPassword = async (newPassword) => {
@@ -130,6 +133,6 @@ export const SetPassword = async (newPassword) => {
 }
 
 export const SignOut = () => {
+    removeUserFromLocal();
    firebase.auth().signOut()
-   removeUserFromLocal();
 };

@@ -10,7 +10,7 @@ const Search = ({placeholder, setQuery}) => {
 		setQuery(e.target.value);
 	}
 	return (
-		<div className='search-wraper flex justify-center items-center w-100 h-20 bg-green-1200'>
+		<div className='search-wraper flex justify-center items-center w-100 min-h-20 bg-green-1200'>
 			<div className='search w-11/12 h-12 bg-white rounded-full flex'>
 				<div className='icon w-1/12 flex items-center justify-end'>
 					{focused ? <ArrowBack /> : <SearchIcon />}

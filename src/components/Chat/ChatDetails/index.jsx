@@ -1,26 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './chatDetails.scss';
+import {formatDistance, subDays} from 'date-fns'
 
-const ChatDetails = ({
-  chat: {
-    id, chatUser, chatType, chatBody, createdAt
-  }
-}) => (
+const ChatDetails = ({chat, user_id, user_name}) => (
   <>
-    { chatType === 'receiver' ? (
+    { chat.user_id === user_id? (
     <div className="chat-detail">
       <div className="chat-bubble triangle left-top">
-        {/* <div className="chat-author">{chatUser}</div> */}
-        <div className="chat-text">{chatBody}</div>
-        <div className="chat-time">{createdAt}</div>
+    <div className="text">{user_name}</div>
+        <div className="chat-text">{chat.message}</div>
+        <div className="chat-time">
+							{formatDistance(subDays(chat.timestamp, 0), new Date())}
+        </div>
       </div>
     </div>
     ) : (
     <div className="chat-detail ">
       <div className="chat-bubble triangle right-top">
-        <div className="chat-text">{chatBody}</div>
-        <div className="chat-time">{createdAt}</div>
+      <div className="chat-text">{chat.displayname}</div>
+      <div className="chat-text">{chat.message}</div>
+        <div className="chat-time">
+							{formatDistance(subDays(chat.timestamp, 0), new Date())}
+        </div>
       </div>
     </div>
     ) }
@@ -35,4 +37,5 @@ ChatDetails.propTypes = {
     createdAt: PropTypes.string
   }).isRequired,
 };
+
 export default ChatDetails;

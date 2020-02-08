@@ -1,13 +1,12 @@
 import {database} from '../config';
 import {getUser} from '../auth';
-const user = getUser();
 
 const Interact = {};
 
 Interact.addRoom = async (room_name = 'room') => {
     const timestamp = new Date().getTime();
         const group_unique_id = Number(timestamp).toString(36).toUpperCase();
-        const userId = user.uid;
+        const userId = getUser().uid;
 
         await database().ref(`chat-rooms/${group_unique_id}`).set({
             id: group_unique_id,
@@ -32,6 +31,7 @@ Interact.addRoom = async (room_name = 'room') => {
 
 Interact.sendMessage = (room_id, message = 'default', username = null) => {
     const timestamp = new Date().getTime();
+    const user = getUser();
     const msg = database().ref(`room-messages/${room_id}`);
     msg.push({
         message,
@@ -41,7 +41,8 @@ Interact.sendMessage = (room_id, message = 'default', username = null) => {
         username || user.phoneNumber,
     })
     database().ref(`chat-rooms/${room_id}`).update({
-        last_message_timestamp: timestamp
+        last_message_timestamp: timestamp,
+        last_message: message
     });
 }
 
@@ -67,7 +68,12 @@ Interact.viewRoomMembers = (room_id, setValue) => {
 }
 
 Interact.addMemberToRoom = async (member, group_unique_id) => {
-    const id = member.id || member.uid;
+    let id;
+    if(member) {
+        id = member.uid || member.id;
+    }else {
+        id = getUser().id
+    }
     const room = database().ref(`room-members/${group_unique_id}`);
     await room.push(member);
     database().ref(`users/${id}/groups`).push({
@@ -93,10 +99,14 @@ Interact.updateUserProfile = (user) => {
 
 Interact.viewUserProfile = (user, setValue) => {
     const the_user = user.uid || user.id;
-    const user_detail = database().ref(`users/${the_user}`);
-    user_detail.on('value', snapshot => {
-        setValue(JSON.stringify(snapshot.val()));
-    })
+    if(the_user) {
+        const user_detail = database().ref(`users/${the_user}`);
+        user_detail.on('value', snapshot => {
+            setValue(JSON.stringify(snapshot.val()));
+        })
+    }
 }
+
+Interact.user = getUser();
 
 export default Interact;
