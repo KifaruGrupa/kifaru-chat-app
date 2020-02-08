@@ -3,7 +3,7 @@ import Sidebar from '../../components/Sidebar';
 import SideAddToGroup from '../../components/SideAddToGroup';
 import Navbar from '../../components/Navbar';
 import ChatArea from '../../components/Chat';
-import {currentUser, removeUserFromLocal} from '../../utils/firebase/auth';
+import {currentUser, removeUserFromLocal, getUser} from '../../utils/firebase/auth';
 import Interact from '../../utils/firebase/chat';
 import {UserContext} from '../../context/UserContext';
 import useFireBase from '../../CustomHook/useFireBase';
@@ -11,7 +11,7 @@ import { DataContext } from '../../context/Appcontext';
 import Loader from '../../svg/Loader';
 
 const Chat = (props) => {
-	const [loginUser] = useFireBase(Interact.viewUserProfile, Interact.user);
+	const [loginUser] = useFireBase(Interact.viewUserProfile, getUser());
 	const [showSideBar, setShowBar] = useState(true);
 	const [showGroup, setAddGroup] = useState(false);
 	const [isAuth, setAuth] = useState(false);

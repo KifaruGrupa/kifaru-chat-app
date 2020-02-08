@@ -54,7 +54,6 @@ const Main = (props) => {
       })
     } catch (e) {
       setLoading(false);
-      console.log(e);
     }
   };
 
@@ -62,7 +61,6 @@ const Main = (props) => {
     setLoading(true);
     SignUp(OTP)
     .then(resp => {
-      console.log(resp)
       if(resp.status === "fail") {
         setError("Incorrect OTP.")
       }else{
@@ -71,7 +69,6 @@ const Main = (props) => {
       setLoading(false);
     })
     .catch(err=>{
-      console.log(err);
       setLoading(false);
     })
   };
@@ -161,7 +158,7 @@ const Main = (props) => {
                 ) :
                 (index === 3 || index === 4)  ? (
                   <input
-                    type="text"
+                    type="password"
                     value={password}
                     onChange={(e)=>{
                       setError("");

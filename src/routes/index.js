@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Route, BrowserRouter as Router, withRouter } from 'react-router-dom';
+import { Route, HashRouter as Router, withRouter } from 'react-router-dom';
 import Home from '../views/home'
 import SignUp from '../views/signup';
 import SignIn from '../views/signin';

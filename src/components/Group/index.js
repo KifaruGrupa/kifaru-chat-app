@@ -2,11 +2,12 @@ import React, {useState, useEffect, useContext} from 'react';
 import GroupList from './GroupList'
 import Interact from '../../utils/firebase/chat';
 import useFireBase from '../../CustomHook/useFireBase';
+import {getUser} from '../../utils/firebase/auth'
 
 
 const Group = ({ setShowBar}) => {
     const [allRooms] = useFireBase(Interact.viewAllRooms);
-    const [currentUser] = useFireBase(Interact.viewUserProfile, Interact.user);
+    const [currentUser] = useFireBase(Interact.viewUserProfile, getUser());
     const [userGroups, setUserGroups] = useState(null);
 
     const getUserRooms = (currentUser) => {
@@ -23,12 +24,8 @@ const Group = ({ setShowBar}) => {
     }
 
     useEffect(() => {
-      currentUser && setUserGroups(getUserRooms(currentUser))
-    }, [allRooms]);
-
-    useEffect(() => {
      currentUser && allRooms && setUserGroups(getUserRooms(currentUser))
-    }, [currentUser]);
+    }, [currentUser, allRooms]);
  
 
    return (

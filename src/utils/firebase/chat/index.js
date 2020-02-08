@@ -1,21 +1,12 @@
 import {database} from '../config';
 import {getUser} from '../auth';
-const user = getUser();
 
 const Interact = {};
 
 Interact.addRoom = async (room_name = 'room') => {
     const timestamp = new Date().getTime();
         const group_unique_id = Number(timestamp).toString(36).toUpperCase();
-        let userId;
-        console.log('userrrr,', user);
-        if(user) {
-            userId = user.uid;
-        }else {
-            console.log('getUse', getUser())
-            const d = getUser();
-            userId = d.uid
-        }
+        const userId = getUser().uid;
 
         await database().ref(`chat-rooms/${group_unique_id}`).set({
             id: group_unique_id,
@@ -40,6 +31,7 @@ Interact.addRoom = async (room_name = 'room') => {
 
 Interact.sendMessage = (room_id, message = 'default', username = null) => {
     const timestamp = new Date().getTime();
+    const user = getUser();
     const msg = database().ref(`room-messages/${room_id}`);
     msg.push({
         message,
@@ -76,13 +68,10 @@ Interact.viewRoomMembers = (room_id, setValue) => {
 }
 
 Interact.addMemberToRoom = async (member, group_unique_id) => {
-    console.log(member, group_unique_id);
-    console.log('member,', member)
     let id;
     if(member) {
         id = member.uid || member.id;
     }else {
-        console.log('get userr', getUser())
         id = getUser().id
     }
     const room = database().ref(`room-members/${group_unique_id}`);
@@ -118,6 +107,6 @@ Interact.viewUserProfile = (user, setValue) => {
     }
 }
 
-Interact.user = user;
+Interact.user = getUser();
 
 export default Interact;
