@@ -7,7 +7,15 @@ const Interact = {};
 Interact.addRoom = async (room_name = 'room') => {
     const timestamp = new Date().getTime();
         const group_unique_id = Number(timestamp).toString(36).toUpperCase();
-        const userId = user.uid || getUser().uid;
+        let userId;
+        console.log('userrrr,', user);
+        if(user) {
+            userId = user.uid;
+        }else {
+            console.log('getUse', getUser())
+            const d = getUser();
+            userId = d.uid
+        }
 
         await database().ref(`chat-rooms/${group_unique_id}`).set({
             id: group_unique_id,
