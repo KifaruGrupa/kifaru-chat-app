@@ -51,7 +51,7 @@ const ProfileCard = () => {
 				uid: thisUser.id || thisUser.uid,
 				displayName: userForm.name,
 				photoURL: imgUrl,
-				phoneNumber: userForm.phone,
+				phoneNumber: thisUser.phone_number || thisUser.phoneNumber,
 			};
 			Interact.updateUserProfile(updated);
 			setshowEdit(false);
@@ -66,7 +66,6 @@ const ProfileCard = () => {
 		if (user) {
 			setForm({
 				name: user.name || (thisProfile.id === thisUser.id ? 'You' : 'User'),
-				phone: user.phone_number || user.phoneNumber || '+234567788990',
 				imgUrl:
 					user.avatar ||
 					user.photoUrl ||
@@ -136,15 +135,9 @@ const ProfileCard = () => {
 					value={userForm.name}
 					disabled={!showEdit}
 				/>
-				<ProfileInput
-					onChange={handleChange}
-					name='phone'
-					regEx={/^[+][\d]{8,15}$/g}
-					errorMsg='prof-input Invalid format for phone number'
+				<p
 					className='mt-4 font-bold bg-transparent w-full block text-center text-white'
-					value={userForm.phone}
-					disabled={!showEdit}
-				/>
+				>{thisProfile ? (thisProfile.phone_number || thisProfile.phoneNumber) : '+234567788990'}</p>
 			</form>
 		</div>
 	);

@@ -34,7 +34,7 @@ const Userbox = ({ member, name, phone_number, bool, setAddGroup }) => {
 				>
 					<div className='profile-pic flex items-center justify-start mr-4 h-16  cursor-pointer'>
 						<img
-							src='https://i.pinimg.com/236x/10/7f/10/107f10abd0b67486b7f0bb17500eda22--black-men-lips.jpg'
+							src={member.photoURL || member.avatar || 	'https://res.cloudinary.com/dflmq4zxb/image/upload/v1581205772/Group_2_jghuh9.jpg'}
 							alt='img'
 							className='h-10 w-10 rounded-full border-white border-3 border-solid object-cover cursor-pointer'
 						/>
