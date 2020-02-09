@@ -8,7 +8,7 @@ const ChatDetails = ({chat, user_id, user_name}) => (
     { chat.user_id === user_id? (
     <div className="chat-detail">
       <div className="chat-bubble triangle left-top">
-    <div className="text">{user_name}</div>
+    <div className="text font-black text-gray-800">Me</div>
         <div className="chat-text">{chat.message}</div>
         <div className="chat-time">
 							{formatDistance(subDays(chat.timestamp, 0), new Date())}
@@ -18,7 +18,7 @@ const ChatDetails = ({chat, user_id, user_name}) => (
     ) : (
     <div className="chat-detail ">
       <div className="chat-bubble triangle right-top">
-      <div className="chat-text">{chat.displayname}</div>
+      <div className="chat-text font-bold text-gray-800">{chat.displayname}</div>
       <div className="chat-text">{chat.message}</div>
         <div className="chat-time">
 							{formatDistance(subDays(chat.timestamp, 0), new Date())}

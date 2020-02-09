@@ -4,13 +4,18 @@
   .chat-bubble {
     margin: 30px;
     padding: 15px;
-    display: grid;
+    display: block;
     position: relative;
     border-radius: 0px 15px 15px 15px;
     width: 90%;
     max-width: 30rem;
     height: auto;
     background-color: #CFFDEC;
+      .chat-text {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      display: block;
+    }
   }
   
   .triangle.left-top:after {
@@ -53,4 +58,7 @@
     text-align: right;
     margin-top: 5px;
   }
+
+
+
 }

@@ -54,7 +54,7 @@ const Sidebar = ({ setShowBar, showSideBar }) => {
 				>
 					{newRoom ? <ArrowBack color="#ffffff" /> : <AddToChatIcon />}
 				</div>
-				<ProfileLink sidePos />
+					<ProfileLink sidePos />
 			</div>
 <<<<<<< HEAD
 			<Search placeholder='Search or start a new chat' setQuery={setQuery}/>
