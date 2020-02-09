@@ -97,7 +97,7 @@ Interact.updateUserProfile = (user) => {
      })
 }
 
-Interact.viewUserProfile = (user, setValue) => {
+Interact.viewUserProfile = (user, setValue) => {   
     const the_user = user.uid || user.id;
     if(the_user) {
         const user_detail = database().ref(`users/${the_user}`);

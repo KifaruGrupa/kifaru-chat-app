@@ -16,7 +16,7 @@ const SideAddToGroup = ({ setAddGroup }) => {
 				onClick={() => setAddGroup(false)}
 				className='modal flex-grow bg-gray-50'
 			></div>
-			<div className='add-to-group md:min-w-md max-w-lg side-bar  md:w-3/12 bg-green-1100'>
+			<div className='add-to-group w-full md:min-w-md max-w-lg side-bar  md:w-3/12 bg-green-1100'>
 				<div className='recent-chat-header px-8 w-100 h-20 flex justify-center items-center'>
 					<div onClick={() => setAddGroup(false)} className='cursor-pointer'>
 						<CutIcon />
@@ -28,7 +28,7 @@ const SideAddToGroup = ({ setAddGroup }) => {
 				<Search placeholder='Search to add to a group' />
 				{!allUsers ?  <p className="text-center text-white">No User yet.</p> : (
 					<>
-				<div className='messages pt-4'>
+				<div className='messages pt-4 overflow-y-scroll'>
 					{thisGroupData &&
 						allUsers.map((member, index) => {
 							const { name, phone_number, groups } = member;
@@ -40,6 +40,7 @@ const SideAddToGroup = ({ setAddGroup }) => {
 									<Userbox
 										bool = {groupIds && !groupIds.includes(thisGroupData.id)} //new
 										member={member}
+										setAddGroup={setAddGroup}
 										name={name}
 										phone_number={phone_number}
 										key={index}

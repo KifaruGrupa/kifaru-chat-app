@@ -34,7 +34,7 @@ const Sidebar = ({ setShowBar, showSideBar }) => {
 				>
 					{newRoom ? <ArrowBack color="#ffffff" /> : <AddToChatIcon />}
 				</div>
-				<ProfileLink sidePos />
+					<ProfileLink sidePos />
 			</div>
 				<div className={`newRoom ${!newRoom ? 'hidden' : '' } flex w-full px-6 pb-2`} >
 					<input
