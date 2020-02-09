@@ -1,6 +1,7 @@
 import React, { useContext} from 'react';
 import {formatDistance, subDays} from 'date-fns';
 import {DataContext} from '../../context/Appcontext';
+import './groupList.scss';
 
 const GroupList = ({data, radioType, setShowBar}) => {
 	const [thisGroupData, setthisGroupData] = useContext(DataContext);
@@ -30,7 +31,7 @@ const GroupList = ({data, radioType, setShowBar}) => {
 							{formatDistance(subDays(data.last_message_timestamp || data.timestamp, 0), new Date())}
 						</span>
 					</div>
-					<p className='w-10/12 ml-0 mt-2 ml-1 text-xs text-green-70 cursor-pointer'>
+					<p className='into-text w-10/12 ml-0 mt-2 ml-1 text-xs text-green-70 cursor-pointer'>
 						{data.last_message || 'last group message here'}
 					</p>
 				</div>

@@ -4,7 +4,6 @@ import Interact from '../../utils/firebase/chat';
 import useFireBase from '../../CustomHook/useFireBase';
 import {getUser} from '../../utils/firebase/auth'
 
-
 const Group = ({ setShowBar}) => {
     const [allRooms] = useFireBase(Interact.viewAllRooms);
     const [currentUser] = useFireBase(Interact.viewUserProfile, getUser());
