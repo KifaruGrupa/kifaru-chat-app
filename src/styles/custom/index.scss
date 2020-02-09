@@ -74,28 +74,27 @@ select:focus {
 	transition: transform 0.5s ease;
 	.imgWrap {
 		margin-top: 10%;
-	img {
-		height: 8rem;
-		width: 8rem;
-		border-width: 0.5em;
+		img {
+			height: 8rem;
+			width: 8rem;
+			border-width: 0.5em;
+		}
+		.edit-img {
+			bottom: 0.2em;
+			right: -0.2em;
+		}
 	}
-	.edit-img {
-		bottom: 0.2em;
-		right: -0.2em
+	.input-edit {
+		border: none;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 	}
-
-}
-.input-edit {
-	border: none;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-.input-edit:focus {
-	border-color:  rgba(255, 255, 255, 0.7);
-}
+	.input-edit:focus {
+		border-color: rgba(255, 255, 255, 0.7);
+	}
 }
 
 .profile-hide {
-		transform: translateX(100%);
+	transform: translateX(100%);
 }
 
 .min-h-20 {
@@ -121,11 +120,22 @@ select:focus {
 	button {
 		border-radius: 5px;
 		border-color: rgba(255, 255, 255, 0.8);
-    outline:none;
+		outline: none;
 		&:hover {
 			background-color: rgba(255, 255, 255, 0.2);
 		}
 	}
+}
 
-	
+.person-add {
+	svg {
+		fill-opacity: 0.7;
+	}
+	&:hover {
+		svg {
+			fill-opacity: 1;
+			width: 22px;
+			height: 16px;
+		}
+	}
 }

@@ -5,7 +5,7 @@ import ProfileLink from '../ProfileLink';
 import AddGroupIcon from '../../svg/AddGroupIcon';
 import { DataContext } from '../../context/Appcontext';
 
-const Navbar = ({ setShowBar, setAddGroup, setShowProfile }) => {
+const Navbar = ({ setShowBar, setAddGroup }) => {
 	const [thisGroupData] = useContext(DataContext);
 
 	return (
@@ -15,9 +15,7 @@ const Navbar = ({ setShowBar, setAddGroup, setShowProfile }) => {
 			</div>
 			<FriendInfo name={thisGroupData && thisGroupData.name}  />
 			<AddGroupIcon setAddGroup={setAddGroup} />
-			<div onClick={() => setShowProfile(true)}>
 				<ProfileLink />
-			</div>
 		</div>
 	);
 };

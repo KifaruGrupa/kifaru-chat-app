@@ -11,7 +11,7 @@ const ProfileInput = ({ name, value, regEx, errorMsg, disabled, className, ...re
 
 	return (
 		<div>
-			<input name={name} value={value} disabled={disabled} className={`${className} ${!disabled ? 'input-edit' : ''}`} {...rest} />
+			<input name={name} autoComplete="off" value={value} disabled={disabled} className={`${className} ${!disabled ? 'input-edit' : ''}`} {...rest} />
 			{!disabled && error && (
 				<p className='text-red-700 font-medium text-sm text-center my-2'>
 					{value.length

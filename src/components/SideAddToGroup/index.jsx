@@ -40,6 +40,7 @@ const SideAddToGroup = ({ setAddGroup }) => {
 									<Userbox
 										bool = {groupIds && !groupIds.includes(thisGroupData.id)} //new
 										member={member}
+										setAddGroup={setAddGroup}
 										name={name}
 										phone_number={phone_number}
 										key={index}
