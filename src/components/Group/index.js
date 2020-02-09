@@ -5,7 +5,6 @@ import useFireBase from '../../CustomHook/useFireBase';
 import {getUser} from '../../utils/firebase/auth'
 import { getUserRooms } from '../../utils/helpers'
 
-
 const Group = ({ setShowBar}) => {
     const [allRooms] = useFireBase(Interact.viewAllRooms);
     const [currentUser] = useFireBase(Interact.viewUserProfile, getUser());

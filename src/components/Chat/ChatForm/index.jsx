@@ -26,6 +26,15 @@ const ChatForm = () => {
     }
   };
 
+  const onKeyDown = (event) => {
+    // 'keypress' event misbehaves on mobile so we track 'Enter' key via 'keydown' event
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      event.stopPropagation();
+      handleSubmit(event);
+    }
+  }
+
   const handleInputChange = (event) => {
     const { value } = event.target;
     setChatMessage(value);
@@ -49,7 +58,7 @@ const ChatForm = () => {
               <img src={showEmojiPicker ? close : smiley} alt='smiley'/></button>
           </div>
           <div className="chat-box flex flex-grow">
-            <textarea className="flex-grow" placeholder="Type a message" value={chatMessage} onChange={handleInputChange} required />
+            <textarea className="flex-grow" placeholder="Type a message" value={chatMessage} onChange={handleInputChange} onKeyDown={onKeyDown} required />
             <button className="chat-send" type="submit"><img src={sendIcon} alt='send' /></button>
           </div>
         </div>
