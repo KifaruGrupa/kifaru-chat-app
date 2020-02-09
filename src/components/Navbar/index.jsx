@@ -15,7 +15,7 @@ const Navbar = ({ setShowBar, setAddGroup }) => {
 			</div>
 			<FriendInfo name={thisGroupData && thisGroupData.name}  />
 			<AddGroupIcon setAddGroup={setAddGroup} />
-			<ProfileLink />
+				<ProfileLink />
 		</div>
 	);
 };

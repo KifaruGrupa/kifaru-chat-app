@@ -8,6 +8,7 @@ const Group = ({ setShowBar}) => {
     const [allRooms] = useFireBase(Interact.viewAllRooms);
     const [currentUser] = useFireBase(Interact.viewUserProfile, getUser());
     const [userGroups, setUserGroups] = useState(null);
+    const [sortGroups, setSortGroups] = useState(null);
 
     const getUserRooms = (currentUser) => {
        if(currentUser.groups) {
@@ -25,11 +26,19 @@ const Group = ({ setShowBar}) => {
     useEffect(() => {
      currentUser && allRooms && setUserGroups(getUserRooms(currentUser))
     }, [currentUser, allRooms]);
+
+    useEffect(() => {
+        let grps = userGroups;
+        if(grps && grps.length) {
+            grps.sort((a,b) => b.last_message_timestamp - a.last_message_timestamp)
+            setSortGroups(grps)
+        }
+    }, [userGroups])
  
 
    return (
        <>
-    {!userGroups ?  <p className="text-center text-white">No Chat rooms yet.</p>: userGroups.map(the_group => 
+    {!sortGroups ?  <p className="text-center text-white">No Chat rooms yet.</p>: sortGroups.map(the_group => 
     <GroupList data={the_group} 
         setShowBar={setShowBar}
         name='recent-msg'
