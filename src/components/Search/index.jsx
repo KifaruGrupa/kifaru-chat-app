@@ -1,4 +1,4 @@
-import React, { useState, useRef} from 'react';
+import React, { useState } from 'react';
 import SearchIcon from '../../svg/SearchIcon';
 import ArrowBack from '../../svg/ArrowBack';
 
@@ -9,7 +9,8 @@ const Search = ({placeholder, setQuery}) => {
 		console.log('query', e.target.value);
 		const query = Number(e.target.value);
 		setQuery(`${query}`);
-	}
+	};
+
 	return (
 		<div className='search-wraper flex justify-center items-center w-100 min-h-20 bg-green-1200'>
 			<div className='search w-11/12 h-12 bg-white rounded-full flex'>

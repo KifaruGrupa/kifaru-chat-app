@@ -1,18 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Interact from '../../utils/firebase/chat';
 import { DataContext } from '../../context/Appcontext';
+import defaultAvatar from '../../assets/avatar.svg';
 
-const Userbox = ({ member, name, phone_number }) => {
+const Userbox = ({ member, name, avatar, phone_number }) => {
 	const [thisGroupData] = useContext(DataContext);
 	const [loading, setLoading] = useState(false);
 
 	const handleAddToGroup = async () => {
 		if (!loading) {
 			 setLoading(true);
-				thisGroupData &&
-				member &&
-				member.id &&
-				(await Interact.addMemberToRoom(member, thisGroupData.id));
+			thisGroupData &&
+			member &&
+			member.id &&
+			(await Interact.addMemberToRoom(member, thisGroupData.id));
 		}
 	};
 	return (
@@ -20,7 +21,7 @@ const Userbox = ({ member, name, phone_number }) => {
 			<div onClick={handleAddToGroup} className='chat-box-label flex h-16 px-4'>
 				<div className='profile-pic flex items-center justify-start w-2/12  mr-2 h-20 cursor-pointer'>
 					<img
-						src='https://i.pinimg.com/236x/10/7f/10/107f10abd0b67486b7f0bb17500eda22--black-men-lips.jpg'
+						src={avatar ? avatar : defaultAvatar }
 						alt='img'
 						className='h-10 w-10 rounded-full border-white border-3 border-solid object-cover cursor-pointer'
 					/>

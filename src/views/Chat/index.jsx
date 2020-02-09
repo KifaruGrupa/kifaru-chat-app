@@ -17,7 +17,7 @@ const Chat = (props) => {
 	const [isAuth, setAuth] = useState(false);
 	const [thisUser, setThisUser] = useContext(UserContext);
 	const [thisGroupData] = useContext(DataContext);
-	
+
 	React.useEffect(()=> {
 		//create seperate useEffect for other items
 		currentUser().then((data) => {
@@ -33,12 +33,12 @@ const Chat = (props) => {
 	React.useEffect(() => {
 		setThisUser(loginUser);
 	}, [loginUser]);
-	
+
 	return (!isAuth ? <Loader /> :
 		<div className=' h-screen relative Chat flex w-100'>
 			<Sidebar showSideBar={showSideBar} setShowBar={setShowBar} />
 			<div className='flex max-h-screen relative overflow-y-scroll flex-grow flex-col'>
-			{	thisGroupData && <Navbar setAddGroup={setAddGroup} setShowBar={setShowBar} />}
+			{thisGroupData && <Navbar setAddGroup={setAddGroup} setShowBar={setShowBar} />}
 				<ChatArea />
 			</div>
            {showGroup && <SideAddToGroup setAddGroup={setAddGroup} />}

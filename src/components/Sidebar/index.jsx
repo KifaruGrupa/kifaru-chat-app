@@ -10,7 +10,6 @@ import ArrowBack from '../../svg/ArrowBack';
 import useQuery from '../../CustomHook/useQuery';
 
 
-
 const Sidebar = ({ setShowBar, showSideBar }) => {
 	const [allUsers] = useFireBase(Interact.getAllUsers);
 	const [ query, setQuery] = useState('');
@@ -21,7 +20,7 @@ const Sidebar = ({ setShowBar, showSideBar }) => {
 
 
 	const handleNewRoom = async () => {
-		setLoading(true)
+		setLoading(true);
 		await Interact.addRoom(roomName);
 		setRoomName('');
 		setNewRoom(false);
@@ -47,19 +46,6 @@ const Sidebar = ({ setShowBar, showSideBar }) => {
 				</div>
 				<ProfileLink sidePos />
 			</div>
-			<Search placeholder='Search or start a new chat' setQuery={setQuery}/>
-			<div className='messages pt-4'>
-				{filtered && filtered.map((user, index) => (
-					<Chatbox
-						setShowBar={setShowBar}
-						name='recent-msg'
-						msg={user.message}
-						phone={user.phone_number}
-						username={user.username}
-						photo={user.avatar}
-						key={index}
-						id={`chat-box-${index}`}
-						radioType
 				<div className={`newRoom ${!newRoom ? 'hidden' : '' } flex w-full px-6 pb-2`} >
 					<input
 						onChange={e => setRoomName(e.target.value)}
@@ -78,7 +64,7 @@ const Sidebar = ({ setShowBar, showSideBar }) => {
 						</button>
 					)}
 				</div>
-			<Search placeholder='Search or start a new chat' />
+			<Search placeholder='Search or start a new chat' setQuery={setQuery}/>
 			<div className='messages flex-grow overflow-y-scroll pt-4'>
 				<Groups setShowBar={setShowBar} />
 			</div>

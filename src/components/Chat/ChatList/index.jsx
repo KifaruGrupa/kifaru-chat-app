@@ -11,11 +11,11 @@ const ChatList = () => {
   let [msg, setMsg] = useState(null);
   const [chats, setchats] = useState(null);
 
-  useEffect(()=> {
-    if(thisGroupData) {
+  useEffect(() => {
+    if (thisGroupData) {
       Interact.viewRoomMessages(thisGroupData.id, setMsg);
     }
-  }, [thisGroupData])
+  }, [thisGroupData]);
   useEffect(()=> {
     if(msg) {
       const strMsg = msg;
@@ -35,7 +35,7 @@ const ChatList = () => {
           if(typeof chat !== typeof '') {
             return (<ChatDetails chat={chat} user_id={thisUser.id} user_name={thisUser.name} key={index} />)
           }
-      })
+        })
       }
     </div>
   ) : '';
