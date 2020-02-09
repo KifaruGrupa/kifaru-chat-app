@@ -35,16 +35,17 @@ const SideAddToGroup = ({ setAddGroup }) => {
 							const groupIds =
 								groups && Object.values(groups).map(({ room_id }) => room_id);
 
-							if (!groups || groupIds && !groupIds.includes(thisGroupData.id)) {
+							// if (!groups || groupIds && !groupIds.includes(thisGroupData.id)) {
 								return (
 									<Userbox
+										bool = {groupIds && !groupIds.includes(thisGroupData.id)} //new
 										member={member}
 										name={name}
 										phone_number={phone_number}
 										key={index}
 									/>
 								);
-							}
+							// }
 						})}
 				</div>
 				</>)}
