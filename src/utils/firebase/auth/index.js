@@ -39,7 +39,6 @@ export const InitializeCaptcha = (captchaContainer) => new Promise((resolve, rej
   w.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(captchaContainer, {
   'size': 'normal',
   'callback': function(response) {
-    console.log(response)
     resolve(response)
   },
   'expired-callback': function() {
@@ -67,7 +66,7 @@ export const VerifyPhoneNumber = phone => firebase.auth().signInWithPhoneNumber(
 });
 
 
-export const SignUp = code => w.confirmationResult.confirm(code).then(result =>{ 
+export const SignUp = code => w.confirmationResult.confirm(code).then(result =>{
   addUserRecord(result.user);
   SaveUserToLocal(result.user);
 

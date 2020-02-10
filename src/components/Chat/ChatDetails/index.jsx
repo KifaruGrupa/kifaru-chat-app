@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './chatDetails.scss';
 import {formatDistance, subDays} from 'date-fns'
 
-const ChatDetails = ({chat, user_id, user_name}) => (
+const ChatDetails = ({chat, user_id}) => (
   <>
     { chat.user_id === user_id? (
     <div className="chat-detail">

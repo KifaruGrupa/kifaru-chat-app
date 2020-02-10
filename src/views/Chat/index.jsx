@@ -16,7 +16,7 @@ const Chat = (props) => {
 	const [showSideBar, setShowBar] = useState(true);
 	const [showGroup, setAddGroup] = useState(false);
 	const [isAuth, setAuth] = useState(false);
-	const [thisUser, setThisUser] = useContext(UserContext);
+	const [_, setThisUser] = useContext(UserContext);
 	const [thisGroupData] = useContext(DataContext);
 
 	React.useEffect(() => {

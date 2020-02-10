@@ -1,14 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Search from '../Search';
 import Userbox from '../Userbox';
 import CutIcon from '../../svg/CutIcon';
 import useFireBase from '../../CustomHook/useFireBase';
 import Interact from '../../utils/firebase/chat';
 import { DataContext } from '../../context/Appcontext';
+import useQuery from '../../CustomHook/useQuery';
 
 const SideAddToGroup = ({ setAddGroup }) => {
 	const [allUsers] = useFireBase(Interact.getAllUsers);
 	const [thisGroupData] = useContext(DataContext);
+	const [ query, setQuery] = useState('');
+	const [filtered, setFiltered] = useQuery(allUsers, query, 'phone_number');
+
+	useEffect(() => {
+		if (query === '') {
+			setFiltered(allUsers);
+		}
+	}, [query, filtered, setFiltered, allUsers]);
 
 	return (
 		<div className='add-to-group-wrap z-50 flex fixed inset-0 w-screen h-screen'>
@@ -25,13 +34,13 @@ const SideAddToGroup = ({ setAddGroup }) => {
 						Add To Group
 					</h3>
 				</div>
-				<Search placeholder='Search to add to a group' />
+				<Search placeholder='Search to add to a group' setQuery={setQuery}/>
 				{!allUsers ?  <p className="text-center text-white">No User yet.</p> : (
 					<>
 				<div className='messages pt-4 overflow-y-scroll'>
-					{thisGroupData &&
-						allUsers.map((member, index) => {
-							const { name, phone_number, groups } = member;
+					{ filtered && thisGroupData &&
+						filtered.map((member, index) => {
+							const { name, phone_number, avatar, groups } = member;
 							const groupIds =
 								groups && Object.values(groups).map(({ room_id }) => room_id);
 
@@ -43,12 +52,14 @@ const SideAddToGroup = ({ setAddGroup }) => {
 										setAddGroup={setAddGroup}
 										name={name}
 										phone_number={phone_number}
+										avatar={avatar}
 										key={index}
 									/>
 								);
 							// }
 						})}
-				</div>
+					</div>
+
 				</>)}
 			</div>
 		</div>
