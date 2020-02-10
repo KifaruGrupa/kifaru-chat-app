@@ -23,7 +23,7 @@ const GroupList = ({data, radioType, setShowBar}) => {
 						className='h-10 w-10 rounded-full border-white border-4 border-solid object-cover cursor-pointer'
 					/>
 				</div>
-				<div className='info flex-grow h-22 border-solid border-green-40 border-b-2 cursor-pointer'>
+				<div className='info h-22 border-solid border-green-40 border-b-2 cursor-pointer w-10/12'>
 					<div className='name-wrap mt-4 flex items-center justify-center pl-1 cursor-pointer'>
 						<h3 className=' flex-grow text-sm text-white font-bold cursor-pointer'>
 							{data.name ? data.name : data.phone}
@@ -32,7 +32,7 @@ const GroupList = ({data, radioType, setShowBar}) => {
 							{formatDistance(subDays(data.last_message_timestamp || data.timestamp, 0), new Date())}
 						</span>
 					</div>
-					<p className='into-text w-10/12 ml-0 mt-2 ml-1 text-xs text-green-70 cursor-pointer'>
+					<p className='into-text ml-0 mt-2 ml-1 text-xs text-green-70 cursor-pointer overflow-hidden truncate'>
 						{data.last_message || 'last group message here'}
 					</p>
 				</div>
