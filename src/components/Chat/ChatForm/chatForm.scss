@@ -47,6 +47,11 @@ $grey: #F0F0F0;
     button:focus, textarea:focus {
       outline: none;
     }
-    
+
+  }
+
+  .emojipicker {
+    position: absolute;
+    bottom: 70px;
   }
 }

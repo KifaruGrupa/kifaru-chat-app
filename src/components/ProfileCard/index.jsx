@@ -35,7 +35,6 @@ const ProfileCard = () => {
 
 	const handleImgChange = event => {
 		const [imgFile] = event.target.files;
-		console.log(imgFile)
 		setPictureFile(imgFile);
 		loadFilePath(imgFile);
 	};
@@ -82,7 +81,7 @@ const ProfileCard = () => {
 		<div
 			className={`prof-card ${
 				!showProfile ? 'profile-hide' : ''
-			} w-full z-10 absolute min-h-screen md:min-w-md max-w-lg md:w-3/12 bg-green-1100`}
+			} w-full z-10 absolute min-h-screen md:min-w-md max-w-lg md:w-3/12 bg-primary`}
 		>
 			<div className='header h-20 flex justify-between items-center px-6'>
 				<div
@@ -109,7 +108,7 @@ const ProfileCard = () => {
 						alt=''
 						className='h-28 w-28 rounded-full border-white border-5 border-solid object-cover cursor-pointer`'
 					/>
-				
+
 					{showEdit && (
 						<>
 						<label htmlFor='profile-img-upload' className="cursor-pointer">

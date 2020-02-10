@@ -3,6 +3,7 @@ import Interact from '../../utils/firebase/chat';
 import { DataContext } from '../../context/Appcontext';
 import PersonAdd from '../../svg/PersonAdd';
 import { ProfileContext } from '../../context/ProfileContext';
+import defaultAvatar from '../../assets/avatar.svg';
 
 const Userbox = ({ member, name, phone_number, bool, setAddGroup }) => {
 	const [thisGroupData] = useContext(DataContext);
@@ -34,7 +35,7 @@ const Userbox = ({ member, name, phone_number, bool, setAddGroup }) => {
 				>
 					<div className='profile-pic flex items-center justify-start mr-4 h-16  cursor-pointer'>
 						<img
-							src={member.photoURL || member.avatar || 	'https://res.cloudinary.com/dflmq4zxb/image/upload/v1581205772/Group_2_jghuh9.jpg'}
+							src={member.photoURL || member.avatar || defaultAvatar}
 							alt='img'
 							className='h-10 w-10 rounded-full border-white border-3 border-solid object-cover cursor-pointer'
 						/>
