@@ -5,14 +5,11 @@ import Search from '../Search';
 import {ReactComponent as RecentIcon} from '../../assets/schedule.svg';
 import ProfileLink from '../ProfileLink';
 import Interact from '../../utils/firebase/chat';
-import useFireBase from '../../CustomHook/useFireBase';
 import Groups from '../Group';
 import ArrowBack from '../../svg/ArrowBack';
 
 
 const Sidebar = ({ setShowBar, showSideBar }) => {
-	const [allUsers] = useFireBase(Interact.getAllUsers);
-	const [ query, setQuery] = useState('');
 	const [newRoom, setNewRoom] = useState(false);
 	const [roomName, setRoomName] = useState('');
 	const [loading, setLoading] = useState(false);
