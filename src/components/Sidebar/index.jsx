@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AddToChatIcon from '../../svg/AddToChatIcon';
-import AddGroupIcon from '../../svg/AddGroupIcon';
-import Search from '../Search';
 import {ReactComponent as RecentIcon} from '../../assets/schedule.svg';
 import ProfileLink from '../ProfileLink';
 import Interact from '../../utils/firebase/chat';
 import Groups from '../Group';
 import ArrowBack from '../../svg/ArrowBack';
 
-
 const Sidebar = ({ setShowBar, showSideBar }) => {
 	const [newRoom, setNewRoom] = useState(false);
 	const [roomName, setRoomName] = useState('');
 	const [loading, setLoading] = useState(false);
-
 
 	const handleNewRoom = async () => {
 		setLoading(true);

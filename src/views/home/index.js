@@ -200,17 +200,17 @@ const Main = (props) => {
       </header>
       <div id="middle">
         <div>
-          <img src={chatIcon}/>
+          <img src={chatIcon} alt="chat icon"/>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text dummy</p>
         </div>
 
         <div>
-          <img src={callIcon}/>
+          <img src={callIcon} alt="call icon"/>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text dummy</p>
         </div>
 
         <div>
-          <img src={groupIcon}/>
+          <img src={groupIcon} alt="group icon" />
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text dummy</p>
         </div>
 
