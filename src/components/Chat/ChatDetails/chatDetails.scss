@@ -59,6 +59,9 @@
     margin-top: 5px;
   }
 
-
+  .chat-text {
+    overflow: hidden;
+    overflow-wrap: break-word;
+  }
 
 }
