@@ -17,7 +17,7 @@
       display: block;
     }
   }
-  
+
   .triangle.left-top:after {
     content: ' ';
     position: absolute;
@@ -35,7 +35,7 @@
     background-color: #FFC46A;
     margin: 0 2em 2em auto;
   }
-  
+
   .triangle.right-top:before {
       content: ' ';
       position: absolute;
@@ -61,4 +61,8 @@
 
 
 
+  .chat-text {
+    overflow: hidden;
+    overflow-wrap: break-word;
+  }
 }

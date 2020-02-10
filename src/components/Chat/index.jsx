@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useRef} from 'react';
 import ChatList from './ChatList';
 import ChatForm from './ChatForm';
 import EmptyChat from './EmptyChat';
@@ -8,6 +8,11 @@ import './chat.scss';
 const Chat = () => {
 	const [thisGroupData] = useContext(DataContext);
 	const [show, setShow] = useState(false)
+	const chatBody = useRef(null);
+
+	const updateScroll =  () => {
+		chatBody.current.scrollIntoView();
+	}
 
 	useEffect(() => {
 		if(thisGroupData) {
@@ -18,8 +23,8 @@ const Chat = () => {
 	return (
 	<>
 		<div className='flex flex-grow overflow-y-scroll flex-col'>
-			<div className='chatBody overflow-y-scroll flex-grow'>
-				<ChatList />
+			<div className='chatBody overflow-y-scroll flex-grow' ref={chatBody}>
+				<ChatList updateScroll={updateScroll}/>
 				{!show && (
 					<EmptyChat/>
 					)
