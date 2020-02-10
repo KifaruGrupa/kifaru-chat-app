@@ -11,7 +11,10 @@ const Chat = () => {
 	const chatBody = useRef(null);
 
 	const updateScroll =  () => {
-		chatBody.current.scrollIntoView();
+		const scrollHeight = chatBody.current.scrollHeight;
+		const height = chatBody.current.clientHeight;
+		const maxScrollTop = scrollHeight - height;
+		chatBody.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
 	}
 
 	useEffect(() => {
