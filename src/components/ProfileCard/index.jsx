@@ -80,7 +80,7 @@ const ProfileCard = ({props: {history}}) => {
 
 	const handleSignOut = () => {
 		SignOut();
-		history.push('/');
+		window.location.reload();
 	}
 	return (
 		<div
