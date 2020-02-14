@@ -5,7 +5,7 @@ const w = window;
 const addUserRecord = (user) => {
   database().ref(`users/${user.uid}`).set({
      id: user.uid,
-     name: user.displayName,
+     name: user.displayName || 'default name',
      phone_number: user.phoneNumber,
      avatar: user.photoURL,
      groups: [],

@@ -53,7 +53,7 @@ const Chat = (props) => {
 				<ChatArea />
 			</div>
 			{showGroup && <SideAddToGroup setAddGroup={setAddGroup} />}
-			<ProfileCard	/>
+			<ProfileCard props={{...props}}	/>
 		</div>
 	);
 };

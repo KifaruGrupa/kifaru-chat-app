@@ -6,8 +6,9 @@ import { ProfileContext } from '../../context/ProfileContext';
 import { UserContext } from '../../context/UserContext';
 import Interact from '../../utils/firebase/chat';
 import cloudinaryUpload from '../../utils/cloudinaryUpload';
+import { SignOut } from '../../utils/firebase/auth';
 
-const ProfileCard = () => {
+const ProfileCard = ({props: {history}}) => {
 	const { thisProfile, setShowProfile, showProfile } = useContext(
 		ProfileContext
 	);
@@ -77,6 +78,10 @@ const ProfileCard = () => {
 		setUser(thisProfile);
 	}, [thisProfile]);
 
+	const handleSignOut = () => {
+		SignOut();
+		history.push('/');
+	}
 	return (
 		<div
 			className={`prof-card ${
@@ -92,10 +97,11 @@ const ProfileCard = () => {
 				>
 					<CutIcon />
 				</div>
+				<span onClick={() => handleSignOut()} className='font-bold cursor-pointer ml-2 text-black'>SIGN OUT</span>
 				{thisProfile && thisUser && thisProfile.id === thisUser.id && (
 					<span
-						onClick={handleSave}
-						className='font-bold cursor-pointer ml-2 text-white'
+					onClick={handleSave}
+					className='font-bold cursor-pointer ml-2 text-white'
 					>
 						{(loading ? 'SAVING...' : (!showEdit ? 'EDIT PROFILE' : 'DONE'))}
 					</span>

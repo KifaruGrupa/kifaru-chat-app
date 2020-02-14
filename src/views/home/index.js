@@ -7,7 +7,6 @@ import {
   SignUp,
   LogIn,
   getUser,
-  SignOut
 } from '../../utils/firebase/auth';
 import chatIcon from '../../assets/chat.svg';
 import groupIcon from '../../assets/group.svg';
@@ -29,7 +28,6 @@ const Main = (props) => {
   const [ password, setPassword ] = useState('');
 
   useEffect(() => {
-    SignOut();
     if(getUser()) {
 				props.history.push('/chat')
     }
@@ -217,7 +215,7 @@ const Main = (props) => {
       </div>
       <footer>
         <p>Terms & Conditions</p>
-        <p>Built with ️❤ by Kifaru Grupa.io team </p>
+        <p>Built with ️❤ by Kifaru team </p>
         <p>kifaru.github.io</p>
 
       </footer>
