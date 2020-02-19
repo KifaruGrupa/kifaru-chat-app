@@ -1,5 +1,5 @@
 import React, { useContext} from 'react';
-import {formatDistance, subDays} from 'date-fns';
+import {formatDistance, subDays, differenceInSeconds} from 'date-fns';
 import {DataContext} from '../../context/Appcontext';
 import defaultAvatar from '../../assets/group-avatar.svg';
 import './groupList.scss';
@@ -34,6 +34,10 @@ const GroupList = ({data, radioType, setShowBar}) => {
 					</div>
 					<p className='into-text ml-0 mt-2 ml-1 text-xs text-green-70 cursor-pointer overflow-hidden truncate'>
 						{data.last_message || 'last group message here'}
+					</p>
+					<p className="flex flex-row-reverse">
+						{Number(differenceInSeconds(Date.now(), data.last_message_timestamp)) < 5 && (thisGroupData && thisGroupData.id) !== data.id ? 
+						<span className="flex rounded-full bg-red-500 uppercase px-2 py-1 text-xs font-bold mr-3">new</span>: ''}
 					</p>
 				</div>
 			</label>
